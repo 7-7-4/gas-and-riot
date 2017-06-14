@@ -1,0 +1,20 @@
+<tag-body>
+  <style scoped>
+    :scope {
+      background-color: #333;
+      display: block;
+      padding: 20px;
+    }
+    span.err, h2 {
+      color: #ddd;
+    }
+  </style>
+  
+  <h2 if={opts.param == ''}> choose menu</h2>
+  <output if={opts.param == 'output'} />
+  <inout if={opts.param == 'inout'} />
+
+  <script>
+  </script>
+
+</tag-body>

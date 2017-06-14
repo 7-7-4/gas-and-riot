@@ -1,0 +1,39 @@
+<tag-menu>
+  <style scoped>
+    :scope { display: block }
+      ul{
+          list-style: none;
+          padding: 0;
+          margin: 0;
+      }
+      li{ 
+          display: inline-block
+      }
+      li.current {
+        background-color: #333;
+        color: #fff;
+      }
+      a {
+          color: inherit;
+          display: block;
+          padding: 1.2em;
+          text-decoration: none;
+      }
+      a:hover {
+          background: #ccc;
+          color: #000;
+      }
+      li.current >  a:hover {
+        background-color: #333;
+          color: #ccc;
+      }
+  </style>
+
+  <ul>
+    <li each={ url in opts.urls } class={ url.linkClass }>
+        <a href={ url.url }>{ url.title }</a>
+    </li>
+  </ul>
+  
+  <input type="hidden" name="linkClass">
+</tag-menu>

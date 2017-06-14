@@ -1,0 +1,75 @@
+<output>
+  <style scoped>
+    table {
+      background: #eee;
+      width: 700px;
+    }
+    th {
+      background: #ccc;
+      border: 1px solid #ccc;
+      font-weight: bold;
+      text-align: center;
+      padding: 5px 15px;
+    }
+
+    td {
+      border: 1px solid #ccc;
+      height: 30px;
+      padding: 3px 5px;
+      vertical-align: middle;
+    }
+
+    td.str{
+    }
+
+    td.num {
+      text-align: right;
+    }
+
+    div.title {
+      color: #fff;
+      font-size: 18px;
+    }
+    div.form-link a {
+      color: #fff;
+      text-decoration: underline;
+    }
+  </style>
+
+  <content>
+    <span class="err" if={error != ''}>{error}</span>
+    
+    <div class="title">年齢別人口</div>
+    <table if={Object.keys(datas).length != 0}>
+      <tr>
+        <th>年齢</th>
+        <th>男</th>
+        <th>女</th>
+      </tr>
+      <tr each={data in datas}>
+        <td class='str'>{data.年齢}</td>
+        <td class="num">{data.男.toLocaleString()}</td>
+        <td class='num'>{data.女.toLocaleString()}</td>
+      </tr>
+    </table>
+
+    <div class="form-link">
+    <a href="https://docs.google.com/spreadsheets/d/1Gk9m7xBYKLV396MVylN24FWEXcXwkTsvUA5mdgDw3Z8/edit?usp=sharing" target="_blank">元データ</a>
+    </div>
+  </content>
+
+  <script>
+    this.error = '';
+    // APIからJSONデータを取得
+    fetch('https://script.google.com/macros/s/AKfycbzzqxKuOXfW5P6Cqtx0sYbuT3uxbYu7biDRM5xSIGsmd-vdd4R7/exec')
+      .then((data) => {
+        return data.json();
+      })
+      .then((datas) => {
+        this.update({datas});
+      })
+      .catch((error) => {
+        this.update({error});
+      });
+  </script>
+</output>

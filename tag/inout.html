@@ -1,0 +1,80 @@
+<inout>
+  <style scoped>
+    table {
+      background: #eee;
+      width: 80%;
+    }
+    th {
+      background: #ccc;
+      border: 1px solid #ccc;
+      font-weight: bold;
+      text-align: center;
+      padding: 5px;
+    }
+
+    td {
+      border: 1px solid #ccc;
+      height: 30px;
+      padding: 3px 5px;
+      vertical-align: middle;
+    }
+
+    td.str {
+
+    }
+
+    td.num {
+      text-align: right;
+    }
+
+    div.form-link {
+      color: #fff;
+    }
+    div.form-link a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+  </style>
+
+  <content>
+    <div class="form-link">
+    登録フォームは<a href="https://goo.gl/forms/Y7IHT4zYsKz4hjt33" target="_blank">こちら</a>
+    </div>
+    <br>
+
+    <span class="err" if={error != ''}>{error}</span>
+
+    <table if={Object.keys(datas).length != 0}>
+      <tr>
+        <th>回答日</th>
+        <th>朝ごはん</th>
+        <th>好きな野菜</th>
+        <th>血液型</th>
+        <th>持っているPC</th>
+      </tr>
+      <tr each={data in datas}>
+        <td class='no'>{data.タイムスタンプ.substr(0,10)}</td>
+        <td class="str">{data.朝ごはん}</td>
+        <td class='str'>{data.好きな野菜}</td>
+        <td class='str'>{data.血液型}</td>
+        <td class='num'>{data.PC所持数}台</td>
+      </tr>
+    </table>
+  </content>
+
+  <script>
+    this.error = '';
+    // APIからJSONデータを取得
+    fetch('https://script.google.com/macros/s/AKfycbx54E5I5zbLF0PuyBJToJVzi79qecEVurvo1vHIHsij_t9MqWNT/exec')
+      .then((data) => {
+        return data.json();
+      })
+      .then((datas) => {
+        this.update({datas});
+      })
+      .catch((error) => {
+        this.update({error});
+      });
+  </script>
+</inout>

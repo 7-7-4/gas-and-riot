@@ -1,0 +1,35 @@
+<tag-main>
+  <style scoped>
+    h1 {
+      font-size: 40px;
+      font-family: fantasy;
+      font-weight: bold;
+}
+    a {
+      color: #000;
+      text-decoration: none;
+    }
+  </style>
+  <h1><a href="/">{ servicename }</a></h1>
+
+  <tag-menu urls={ menuList }/>
+  <tag-body param={ urlParam } />
+  <tag-footer servicename={ servicename } message='' />
+
+  <script>
+    servicename = "gas-and-riot";
+    urlParam = location.search.substring(1);
+
+    // 選択中メニューがあればクラス付与
+    if (urlParam == 'output') {
+    	this.outputClass = 'current';
+    } else if (urlParam == 'inout') {
+      this.inoutClass = 'current';
+    }
+
+    this.menuList = [
+      { title: '表示のみ', url: '?output', linkClass: this.outputClass },
+      { title: '入力＆表示', url: '?inout', linkClass: this.inoutClass },
+    ]
+  </script>
+</tag-main>
